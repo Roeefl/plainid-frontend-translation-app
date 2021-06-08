@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 import SectionHeader from '../common/SectionHeader';
 import { ReadOnlyTextArea, TextField } from '../../fields';
+
+i18next.loadNamespaces(['general'])
+  .then(() => {
+      console.log('loaded');
+  });
 
 const SectionContainer = styled.div`
     width: 60%;
@@ -15,33 +22,32 @@ const FieldsContainer = styled.div`
     margin-top: 6px;
 `;
 
-export default function GeneralDetailsSection({resource}) {
-    const { t } = global;
+function GeneralDetailsSection({ t, resource }) {
     const {name, description, resourceType, path} = resource;
 
     const sectionHeaderProps = {
-        headerText: t('GENERAL_DETAILS_SECTION_TITLE'),
-        subHeaderText: t('GENERAL_DETAILS_SECTION_SUB_TITLE')
+        headerText: t('header.title'),
+        subHeaderText: t('header.subtitle')
     };
     
     const nameProps = {
         value: name,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_NAME')
+        label: t('fieldTitle.name')
     };
 
     const descriptionProps = {
         value: description,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_DESCRIPTION')
+        label: t('fieldTitle.description')
     };
 
     const resourceTypeProps = {
         value: resourceType,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_RESOURCE_TYPE')
+        label: t('fieldTitle.resourceType')
     };
 
     const pathProps = {
         value: path,
-        label: t('GENERAL_DETAILS_SECTION_FIELD_TITLE_RESOURCE_PATH')
+        label: t('fieldTitle.resourcePath')
     };
 
     return (
@@ -60,3 +66,5 @@ export default function GeneralDetailsSection({resource}) {
 GeneralDetailsSection.propTypes = {
     resource: PropTypes.object
 };
+
+export default withTranslation(['general'])(GeneralDetailsSection);

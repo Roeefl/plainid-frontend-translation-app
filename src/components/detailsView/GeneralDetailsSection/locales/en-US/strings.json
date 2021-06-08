@@ -1,0 +1,12 @@
+{
+  "header": {
+    "title": "GENERAL DETAILS",
+    "subtitle": "General Details Section"
+  },
+  "fieldTitle": {
+    "name": "Name",
+    "description": "Description",
+    "resourceType": "Resource Type",
+    "resourcePath": "Resource Path"
+  }
+}
