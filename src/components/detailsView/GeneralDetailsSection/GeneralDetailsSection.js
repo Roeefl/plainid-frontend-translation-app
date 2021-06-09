@@ -1,15 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
+import { useAddTranslations } from '../../../hooks/useAddTranslations';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import SectionHeader from '../common/SectionHeader';
 import { ReadOnlyTextArea, TextField } from '../../fields';
+import strings from './locales/en-US/strings.json';
 
-i18next.loadNamespaces(['general'])
-  .then(() => {
-      console.log('loaded');
-  });
+const LOCALE_KEY = 'general';
 
 const SectionContainer = styled.div`
     width: 60%;
@@ -22,7 +20,9 @@ const FieldsContainer = styled.div`
     margin-top: 6px;
 `;
 
-function GeneralDetailsSection({ t, resource }) {
+function GeneralDetailsSection({ t, i18n, resource }) {
+    useAddTranslations({ language: i18n.language, key: LOCALE_KEY, strings });
+
     const {name, description, resourceType, path} = resource;
 
     const sectionHeaderProps = {
@@ -67,4 +67,4 @@ GeneralDetailsSection.propTypes = {
     resource: PropTypes.object
 };
 
-export default withTranslation(['general'])(GeneralDetailsSection);
+export default withTranslation([LOCALE_KEY])(GeneralDetailsSection);

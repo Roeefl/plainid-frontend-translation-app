@@ -1,30 +1,25 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
 
-import common_enUS from '../locales/en-US/common.json';
+import appStrings from '../locales/en-US/strings.json';
 
-export const init = ({ lang }) => {
+export const DEFAULT_LANGUAGE = 'en-US';
+export const DEFAULT_NAMESPACE = 'app';
+
+export const init = ({ lang = DEFAULT_LANGUAGE } = {}) => {
     return new Promise(async (resolve, reject) => {
         i18next
             .use(initReactI18next)
-            .use(Backend)
             .init({
-                react: {
-                    useSuspense: false
-                },
                 interpolation: { escapeValue: false },
-                fallbackLng: [lang],
+                fallbackLng: [DEFAULT_LANGUAGE],
                 lng: lang,
-                backend: {
-                    loadPath: '/locales/{{lng}}/{{ns}}.json',
-                },
-                // defaultNS: 'common',
-                // ns: ['common'],
+                defaultNS: DEFAULT_NAMESPACE,
+                ns: [DEFAULT_NAMESPACE],
                 resources: {
                     [lang]: {
-                        common: common_enUS,
-                    }
+                        app: appStrings,
+                    },
                 },
             }, (err, t) => {
                 if (err) return reject(err);

@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
-import i18next from 'i18next';
-import styled from 'styled-components';
+import React from 'react';
 import { withTranslation } from 'react-i18next';
+import { useAddTranslations } from '../../hooks/useAddTranslations';
+import styled from 'styled-components';
 import { HeaderText, SubHeaderText } from '../../styles/commonStyles';
+import strings from './locales/en-US/strings.json';
 
-import resources_enUS from './locales/en-US/strings.json';
+const LOCALE_KEY = 'resources';
 
 const ResourceHeaderText = styled(HeaderText)`
     color: #686868;
     margin-bottom: 3px;
 `;
 
-function ResourcesHeader({ t }) {
-    useEffect(() => {
-        i18next.addResourceBundle('en-US', 'resources', resources_enUS);
-    }, []);
+function ResourcesHeader({ t, i18n }) {
+    useAddTranslations({ language: i18n.language, key: LOCALE_KEY, strings });
 
     return (
         <>
@@ -24,4 +23,4 @@ function ResourcesHeader({ t }) {
     );
 }
 
-export default withTranslation(['resources'])(ResourcesHeader);
+export default withTranslation([LOCALE_KEY])(ResourcesHeader);

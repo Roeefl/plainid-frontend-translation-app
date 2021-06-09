@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import MockService from './service/mockService';
-import { init as initTranlation } from './service/translation';
+import { init as initTranlation, DEFAULT_LANGUAGE } from './service/translation';
 import HeaderPanel from './components/HeaderPanel';
 import { GlobalStyle } from './styles/appDefaultStyles';
 import ResourcesContainer from './containers/ResourcesContainer';
@@ -26,7 +26,7 @@ export default class App extends Component {
     }
 
     init = async () => {
-        await initTranlation({ lang: 'en-US' });
+        await initTranlation({ lang: DEFAULT_LANGUAGE });
         this.setState({initCompleted: true});
     };
 

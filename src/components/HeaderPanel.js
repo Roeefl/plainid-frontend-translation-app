@@ -1,7 +1,8 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { headerPanelHeight, HeaderText } from '../styles/commonStyles';
 import logo from '../assets/images/plainid-logo-white.png';
-import {headerPanelHeight, HeaderText} from '../styles/commonStyles';
 
 const HeaderPanelContainer = styled.header`
   display: flex;
@@ -26,15 +27,18 @@ const HeaderPanelText = styled(HeaderText)`
   margin-left: 5px;
 `;
 
-export default function HeaderPanel() {
+function HeaderPanel({ t }) {
     const logoProps = {
         src: logo,
         alt: 'Logo'
     };
+
     return (
         <HeaderPanelContainer>
             <Logo {...logoProps} />
-            <HeaderPanelText>PlainID- Demo App</HeaderPanelText>
+            <HeaderPanelText>{t('appHeader')}</HeaderPanelText>
         </HeaderPanelContainer>
     );
 }
+
+export default withTranslation()(HeaderPanel);
